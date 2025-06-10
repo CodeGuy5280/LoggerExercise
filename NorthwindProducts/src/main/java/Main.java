@@ -45,7 +45,7 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("Displaying all customers...");
-                    String query2 = "SELECT ContactName, CompanyName, City, Country, Phone FROM customers;";
+                    String query2 = "SELECT ContactName, CompanyName, City, Country, Phone FROM customers ORDER BY Country;";
 
                     try (Connection connection = DriverManager.getConnection(url, username, password)) {
                         Statement statement = connection.createStatement();
