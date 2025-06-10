@@ -19,6 +19,7 @@ public class Main {
         System.out.println("What do you want to do?");
         System.out.println("1) Display all products");
         System.out.println("2) Display all customers");
+        System.out.println("3) Display all categories");
         System.out.println("0) Exit");
 
         while (start) {
@@ -62,6 +63,11 @@ public class Main {
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
+                    break;
+                case "3":
+                    System.out.println("3) Displaying all categories...");
+
+
                     break;
                 case "0":
                     System.out.println("0) Exiting...");
