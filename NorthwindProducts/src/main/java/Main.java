@@ -75,6 +75,8 @@ public class Main {
                         while (results.next()) {
                             int categoryID = results.getInt("categoryID");
                             String categoryName = results.getString("categoryName");
+
+//                            System.out.println("");
                             System.out.printf("\nCategory ID " + categoryID + " \n Category Name: " + categoryName + "\n-------------------");
                         }
                     } catch (SQLException e) {
