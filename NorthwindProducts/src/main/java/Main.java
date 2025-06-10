@@ -67,7 +67,19 @@ public class Main {
                 case "3":
                     System.out.println("3) Displaying all categories...");
 
+                    String query3 = "SELECT categoryid, categoryname FROM categories ORDER BY CategoryID;";
+                    try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                        Statement statement = connection.createStatement();
+                        ResultSet results = statement.executeQuery(query3);
 
+                        while (results.next()) {
+                            int categoryID = results.getInt("categoryID");
+                            String categoryName = results.getString("categoryName");
+                            System.out.printf("\nCategory ID " + categoryID + " \n Category Name: " + categoryName + "\n-------------------");
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case "0":
                     System.out.println("0) Exiting...");
