@@ -28,14 +28,14 @@ public class Main {
             switch (choice) {
                 case "1":
                     System.out.println("Displaying all products...");
-                    String query = "SELECT productname, productid, unitprice, unitsinstock FROM products;";
+                    String query = "SELECT productid, productname, unitprice, unitsinstock FROM products;";
                     try (Connection connection = DriverManager.getConnection(url, username, password)) {
                             Statement statement = connection.createStatement();
                             ResultSet results = statement.executeQuery(query);
 
                             while (results.next()) {
-                                String productName = results.getString("productname");
                                 int productId = results.getInt("productid");
+                                String productName = results.getString("productname");
                                 double unitPrice = results.getDouble("unitprice");
                                 int unitsInStock = results.getInt("unitsinstock");
                                 System.out.printf("\nProduct ID " + productId + " \n Product Name: " + productName + "\n Unit Price: $" + unitPrice + "\n Units In Stock: " + unitsInStock + "\n-------------------");
