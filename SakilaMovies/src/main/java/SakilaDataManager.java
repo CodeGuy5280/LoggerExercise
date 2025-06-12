@@ -31,7 +31,6 @@ public class SakilaDataManager {
                 actors.add(new Actor(actorId, firstName, lName));
             }
         }
-
         return actors;
     }
 
