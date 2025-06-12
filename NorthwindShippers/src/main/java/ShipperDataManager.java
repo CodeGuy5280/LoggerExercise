@@ -1,36 +1,37 @@
-import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShipperDataManager {
 
-    private final DataSource dataSource;
+    private final String url = "jdbc:mysql://localhost:3306/northwind";
+    private final String user = "root";
+    private final String password = "yearup2025";
 
-    public ShipperDataManager (DataSource dataSource){
-        this.dataSource = dataSource;
-    }
+    public int insertShipper(Shipper shipper) {
+        String sql = "INSERT INTO Shippers (CompanyName, Phone) VALUES (?, ?)";
 
-    public List<Shipper> findShipperByName() throws SQLException{
-        List<Shipper> shippers = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-        String sql = "SELECT CompanyName, Phone FROM shippers WHERE CompanyName = ?";
+            stmt.setString(1, shipper.getShipperName());
+            stmt.setString(2, shipper.getShipperPhone());
 
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement statement = conn.prepareStatement(sql)) {
+            int shipperRows = stmt.executeUpdate();
 
-            statement.setString(1, shipperName);
-            statement.setString(2, shipperPhone);
-
-            ResultSet results = statement.executeQuery();
-
-            while (results.next()) {
-                int actorId = results.getInt("shipperName");
-                String firstName = results.getString("shipperPhone");
-
-                shippers.add(new Shipper(shipperName, shipperPhone));
+            if (shipperRows == 0) {
+                throw new SQLException("Inserting shipper failed, no rows affected.");
             }
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Inserting shipper failed, no ID obtained.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
         }
-        return shippers;
     }
 }

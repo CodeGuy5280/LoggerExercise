@@ -1,10 +1,19 @@
 public class Shipper {
+    private int shipperId;
     private String shipperName;
-    private int shipperPhone;
+    private String shipperPhone;
 
-    public Shipper(String shipperName, int shipperPhone){
+    public Shipper(String shipperName, String shipperPhone) {
         this.shipperName = shipperName;
         this.shipperPhone = shipperPhone;
+    }
+
+    public int getShipperId() {
+        return shipperId;
+    }
+
+    public void setShipperId(int shipperId) {
+        this.shipperId = shipperId;
     }
 
     public String getShipperName() {
@@ -15,11 +24,11 @@ public class Shipper {
         this.shipperName = shipperName;
     }
 
-    public int getShipperPhone() {
+    public String getShipperPhone() {
         return shipperPhone;
     }
 
-    public void setShipperPhone(int shipperPhone) {
+    public void setShipperPhone(String shipperPhone) {
         this.shipperPhone = shipperPhone;
     }
 }
